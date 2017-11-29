@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-import ujson as json
 from model_utils.models import TimeStampedModel, SoftDeletableModel
 from model_utils import FieldTracker
 from mptt.models import MPTTModel, TreeForeignKey
@@ -71,7 +70,7 @@ class Recomendation(Base):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=False)
 	option = models.ForeignKey(Option, null=False, blank=False)
 	content = models.CharField(max_length=250, null=False, blank=False)
-	#TODO add vote
+	#TODO add vote field
 
 	@cached_property
 	def comments(self):
@@ -87,7 +86,7 @@ class Comment(Base):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=False)
 	recommendation = models.ForeignKey(Recomendation, null=False, blank=False)
 	content = models.CharField(max_length=250, null=False, blank=False)
-	#TODO add vote
+	#TODO add vote field
 
 	def __str__(self):
 		return self.content[0:50]
@@ -114,7 +113,7 @@ class Opinion(Base):
 	topic = models.ForeignKey(Topic, null=False, blank=True)
 	option = models.ForeignKey(Option, null=False, blank=True)
 	content = models.CharField(max_length=250, null=False, blank=False)
-	#TODO add vote
+	#TODO add vote field
 
 	def __str__(self):
 		return self.content[0:50]

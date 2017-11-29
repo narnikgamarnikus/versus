@@ -5,6 +5,15 @@ from .serializers import (CategorySerializer, TopicSerializer, OptionSerializer,
 						OpinionSerializer, RecomendationSerializer, CommentSerializer)
 
 
+'''
+class MyBinding(ResourceBinding):
+
+     def _group_name(self, action, id=None):
+           if action == "create":
+                  return "{}-{}-{}".format(self.model_label, action, user_id)
+'''
+
+
 class CategoryBinding(ResourceBinding):
 
 	model = Category
