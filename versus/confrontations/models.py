@@ -37,20 +37,6 @@ class Category(Base, MPTTModel):
 
 
 @python_2_unicode_compatible
-class Topic(Base):
-	name = models.CharField(max_length=50, unique=True, null=False, blank=False)
-	category = models.ForeignKey(Category, null=False, blank=False)
-	options = models.ManyToManyField(Option)
-
-	cached_property
-	def topic_opinions(self):
-		return [Opinion.objects.filter(topic=self, option=option) for option in self.options.all()]
-
-	def __str__(self):
-		return self.name
-
-
-@python_2_unicode_compatible
 class Option(Base):
 	
 	name = models.CharField(max_length=50, unique=True, null=False, blank=False)
@@ -77,19 +63,6 @@ class Option(Base):
 
 
 @python_2_unicode_compatible
-class Opinion(Base):
-
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=True)
-	topic = models.ForeignKey(Topic, null=False, blank=True)
-	option = models.ForeignKey(Option, null=False, blank=True)
-	content = models.CharField(max_length=250, null=False, blank=False)
-	#TODO add vote
-
-	def __str__(self):
-		return self.content[0:50]
-
-
-@python_2_unicode_compatible
 class Recomendation(Base):
 	
 	STATUS = Choices('positive', 'negative')
@@ -113,6 +86,33 @@ class Comment(Base):
 	
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=False)
 	recommendation = models.ForeignKey(Recomendation, null=False, blank=False)
+	content = models.CharField(max_length=250, null=False, blank=False)
+	#TODO add vote
+
+	def __str__(self):
+		return self.content[0:50]
+
+
+@python_2_unicode_compatible
+class Topic(Base):
+	name = models.CharField(max_length=50, unique=True, null=False, blank=False)
+	category = models.ForeignKey(Category, null=False, blank=False)
+	options = models.ManyToManyField(Option)
+
+	cached_property
+	def topic_opinions(self):
+		return [Opinion.objects.filter(topic=self, option=option) for option in self.options.all()]
+
+	def __str__(self):
+		return self.name
+
+
+@python_2_unicode_compatible
+class Opinion(Base):
+
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=True)
+	topic = models.ForeignKey(Topic, null=False, blank=True)
+	option = models.ForeignKey(Option, null=False, blank=True)
 	content = models.CharField(max_length=250, null=False, blank=False)
 	#TODO add vote
 

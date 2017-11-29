@@ -47,7 +47,7 @@ class RecomendationBinding(ResourceBinding):
 
 class CommentsBinding(ResourceBinding):
 
-	model = Comments
+	model = Comment
 	stream = "comments"
 	serializer_class = CommentSerializer
-	queryset = Comments.objects.all()
+	queryset = Comment.objects.all()

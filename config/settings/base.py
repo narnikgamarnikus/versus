@@ -60,6 +60,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # custom users app
     'versus.users.apps.UsersConfig',
+    'versus.confrontations.apps.ConfrontationsConfig'
     # Your stuff: custom apps go here
 ]
 
@@ -287,3 +288,11 @@ ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+
+
+# chammes-api
+# ------------------------------------------------------------------------------
+# See https://github.com/linuxlewis/channels-api#list-pagination
+CHANNELS_API = {
+  'DEFAULT_PAGE_SIZE': 25
+}
